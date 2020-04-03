@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Back_Base_Whit.png.meta
-guid: d4ac1dd36e4fa974cb645d85632f3cab
+<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Jam_Background_No4_1.png.meta
+guid: bf2b9056f2ee9af4295cca0098a0edb1
 =======
-guid: 0e696d8d787d2a2408e55b322e635512
->>>>>>> ignore:ZostanWDomu/Assets/Sprites/Square.png.meta
+guid: 3ee4f7629417711469a1e684b246cdd2
+>>>>>>> ignore:ZostanWDomu/Assets/Sprites/Player.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -35,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Back_Base_Whit.png.meta
+<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Jam_Background_No4_1.png.meta
     filterMode: -1
     aniso: -1
     mipBias: -100
@@ -51,7 +51,7 @@ TextureImporter:
     wrapV: 0
     wrapW: 0
   nPOTScale: 0
->>>>>>> ignore:ZostanWDomu/Assets/Sprites/Square.png.meta
+>>>>>>> ignore:ZostanWDomu/Assets/Sprites/Player.png.meta
   lightmap: 0
   compressionQuality: 50
   spriteMode: 3
@@ -76,11 +76,11 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Back_Base_Whit.png.meta
+<<<<<<< HEAD:ZostanWDomu/Assets/Sprites/Backgrounds/Jam_Background_No4_1.png.meta
     textureFormat: -1
 =======
     textureFormat: 4
->>>>>>> ignore:ZostanWDomu/Assets/Sprites/Square.png.meta
+>>>>>>> ignore:ZostanWDomu/Assets/Sprites/Player.png.meta
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -92,15 +92,13 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline:
-    - - {x: -2, y: -2}
-      - {x: -2, y: 2}
-      - {x: 2, y: 2}
-      - {x: 2, y: -2}
+    - - {x: 0, y: 2}
+      - {x: -1.7320508, y: -1.0000001}
+      - {x: 1.7320509, y: -0.9999998}
     physicsShape:
-    - - {x: -2, y: -2}
-      - {x: -2, y: 2}
-      - {x: 2, y: 2}
-      - {x: 2, y: -2}
+    - - {x: 0, y: 2}
+      - {x: -1.7320508, y: -1.0000001}
+      - {x: 1.7320509, y: -0.9999998}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
