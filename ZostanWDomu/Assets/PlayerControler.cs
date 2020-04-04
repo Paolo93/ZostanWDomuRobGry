@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    public float movementAngleTolerance = 20.0f;
     public Node currentNode;
 
     void Start()
@@ -38,7 +39,7 @@ public class PlayerControler : MonoBehaviour
                 var destinationAngle = Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * Mathf.Rad2Deg;
                 Debug.Log(string.Format("RA={0} DA={1} DA+={2} DA-={3}", rayAngle, destinationAngle, destinationAngle + 20, destinationAngle - 20));
 
-                if (destinationAngle + 20.0f >= rayAngle && destinationAngle - 20.0f <= rayAngle)
+                if (destinationAngle + movementAngleTolerance >= rayAngle && destinationAngle - movementAngleTolerance <= rayAngle)
                 {
                     node.Mark();
                     markedNode = node;
