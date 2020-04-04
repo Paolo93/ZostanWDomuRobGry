@@ -77,11 +77,10 @@ public class PlayerControler : MonoBehaviour
             currentNode = markedNode;
             markedNode.UnMark();
             transform.position = markedNode.transform.position;
-
-            markedNode = null;
-            moveRequested = false;
         }
 
+        moveRequested = false;
+        markedNode = null;
     }
 
     private Node GetClosestNode(List<Node> nodes)
