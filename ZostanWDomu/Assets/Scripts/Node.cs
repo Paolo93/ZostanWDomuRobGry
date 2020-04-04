@@ -12,11 +12,13 @@ public class Node : MonoBehaviour
 {
     public NodeState nodeState = NodeState.Fixed;
     private SpriteRenderer spriteRenderer;
+    private static List<Node> nodes = new List<Node>();
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetState(nodeState);
+        nodes.Add(this);
     }
 
     void Update()
@@ -31,7 +33,7 @@ public class Node : MonoBehaviour
         {
             spriteRenderer.color = Color.blue;
         }
-        else
+        else if (nodeState == NodeState.Broken)
         {
             spriteRenderer.color = Color.gray;
         }
@@ -47,5 +49,20 @@ public class Node : MonoBehaviour
         {
             SetState(NodeState.Fixed);
         }
+    }
+
+    public void Mark()
+    {
+        spriteRenderer.color = Color.yellow;
+    }
+
+    public void UnMark()
+    {
+        SetState(nodeState);
+    }
+
+    public static List<Node> GetNodes()
+    {
+        return nodes;
     }
 }
