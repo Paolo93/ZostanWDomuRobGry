@@ -12,61 +12,76 @@ public class PlayerControler : MonoBehaviour
         {
             currentNode = GetClosestNode(Node.GetNodes());
         }
+        transform.position = currentNode.transform.position;
     }
 
     private float previousHorizontal = 0.0f;
     private float previousVertical = 0.0f;
+    private float horizontal = 0.0f;
+    private float vertical = 0.0f;
+    Node markedNode = null;
+    bool moveRequested = false;
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Node markedNode = null;
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
         if (horizontal != 0.0f || vertical != 0.0f)
         {
-            if(previousHorizontal != horizontal || previousVertical != vertical)
-            {
-                previousHorizontal = horizontal;
-                previousVertical = vertical;
-                foreach (Node node in GetLinkedNodes())
-                {
-                    node.UnMark();
-                }
-            }
-
-            var end = transform.position + new Vector3(horizontal, vertical, 0);
-            Debug.DrawLine(transform.position, end * 3, Color.green, 0.15f, false);
-
-            var rayAngle = Mathf.Atan2(transform.position.x - horizontal, transform.position.y - vertical) * 180 / Mathf.PI;
+            var rayAngle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
 
             foreach (Node node in GetLinkedNodes())
             {
-                var destinationAngle = Mathf.Atan2(transform.position.x - node.transform.position.x, transform.position.y - node.transform.position.y) * 180 / Mathf.PI;
+                var p1 = transform.position;
+                var p2 = node.transform.position;
+                var destinationAngle = Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * Mathf.Rad2Deg;
+                Debug.Log(string.Format("RA={0} DA={1} DA+={2} DA-={3}", rayAngle, destinationAngle, destinationAngle + 20, destinationAngle - 20));
 
-                if (destinationAngle + 20 >= rayAngle && destinationAngle - 20 <= rayAngle)
+                if (destinationAngle + 20.0f >= rayAngle && destinationAngle - 20.0f <= rayAngle)
                 {
                     node.Mark();
                     markedNode = node;
                     break;
-                }
-                else
-                {
-                    node.UnMark();
                 }
             }
         }
 
         if (Input.GetButtonDown("Fire1") && markedNode)
         {
+            moveRequested = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        var end = new Vector3(horizontal, vertical, 0).normalized * 3;
+        Debug.DrawLine(transform.position, transform.position + end,  Color.green);
+
+        if (previousHorizontal != horizontal || previousVertical != vertical)
+        {
+            previousHorizontal = horizontal;
+            previousVertical = vertical;
+            foreach (Node node in GetLinkedNodes())
+            {
+                node.UnMark();
+            }
+        }
+
+        if (moveRequested)
+        {
             previousHorizontal = 0.0f;
             previousVertical = 0.0f;
 
             Debug.Log("MOVING TO NEW OBJECT");
-            transform.position = markedNode.transform.position;
             currentNode = markedNode;
             markedNode.UnMark();
+            transform.position = markedNode.transform.position;
+
+            markedNode = null;
+            moveRequested = false;
         }
+
     }
 
     private Node GetClosestNode(List<Node> nodes)
@@ -89,12 +104,12 @@ public class PlayerControler : MonoBehaviour
 
     private List<Node> GetLinkedNodes()
     {
-        List<Node> links = new List<Node>();
+        List<Node> nodes = new List<Node>(currentNode.GetLinkedBy());
         foreach (Transform child in currentNode.transform)
         {
-            links.Add(child.GetComponent<Link>().destination);
+            nodes.Add(child.GetComponent<Link>().destination);
         }
 
-        return links;
+        return nodes;
     }
 }

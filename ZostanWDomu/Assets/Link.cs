@@ -20,6 +20,8 @@ public class Link : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetPositions(new []{ connectionPoint1, connectionPoint2 });
+
+        destination.LinkedBy(parent);
     }
 
     private Vector3 GetConnectionPoint(Node node1, Node node2, float radius)
