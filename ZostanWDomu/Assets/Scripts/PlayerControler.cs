@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
-    public float movementAngleTolerance = 20.0f;
+    public float movementAngleTolerance = 30.0f;
     public Node currentNode;
-    public float holdDurationForFix = 3f;
+    public float holdDurationForFix = 1.5f;
 
     void Start()
     {
@@ -41,7 +41,6 @@ public class PlayerControler : MonoBehaviour
                 var p1 = transform.position;
                 var p2 = node.transform.position;
                 var destinationAngle = Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * Mathf.Rad2Deg;
-                //Debug.Log(string.Format("RA={0} DA={1} DA+={2} DA-={3}", rayAngle, destinationAngle, destinationAngle + 20, destinationAngle - 20));
 
                 if (destinationAngle + movementAngleTolerance >= rayAngle && destinationAngle - movementAngleTolerance <= rayAngle)
                 {
