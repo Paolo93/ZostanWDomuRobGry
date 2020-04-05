@@ -42,13 +42,14 @@ public class Link : MonoBehaviour
         connectionPoint2 = GetConnectionPoint(parent, destination, parentRenderer.bounds.size[0] / 2.0f);
 
         lineRenderer = GetComponent<LineRenderer>();
-        linkColor = networkObjectState == NetworkObjectState.Fixed ? Color.blue : Color.gray;
+        linkColor = networkObjectState == NetworkObjectState.Fixed ? Color.blue : Color.red;
         lineRenderer.startColor = linkColor;
         lineRenderer.endColor = linkColor;
         lineRenderer.SetPositions(new []{ connectionPoint1, connectionPoint2 });
+        lineRenderer.transform.position = (connectionPoint1 - connectionPoint2) / 2f;
 
         colorKey = new GradientColorKey[2];
-        colorKey[0].color = Color.grey;
+        colorKey[0].color = Color.red;
         colorKey[0].time = 0.0f;
         colorKey[1].color = Color.blue;
         colorKey[1].time = 1.0f;
@@ -64,9 +65,9 @@ public class Link : MonoBehaviour
         destination.LinkedBy(parent);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Color color = networkObjectState == NetworkObjectState.Fixed ? Color.blue : Color.gray;
+        Color color = networkObjectState == NetworkObjectState.Fixed ? Color.blue : Color.red;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
     }
@@ -103,7 +104,6 @@ public class Link : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Current color: " + gradient.Evaluate(percent));
             lineRenderer.startColor = gradient.Evaluate(percent);
             lineRenderer.endColor = gradient.Evaluate(percent);
         }
