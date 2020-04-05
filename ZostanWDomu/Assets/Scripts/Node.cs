@@ -2,24 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum NodeState
-{
-    Fixed,
-    Broken
-}
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Node : MonoBehaviour
 {
-    public NodeState nodeState = NodeState.Fixed;
+    public NetworkObjectState nodeState = NetworkObjectState.Fixed;
+    public Light2D nodeLight;
+
     private SpriteRenderer spriteRenderer;
-    private static List<Node> nodes = new List<Node>();
-    private List<Node> linkedByNodes = new List<Node>();
+    private static HashSet<Node> nodes = new HashSet<Node>();
+    private HashSet<Node> linkedByNodes = new HashSet<Node>();
+    
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        SetState(nodeState);
+        spriteRenderer.color = Color.blue;
+
+        foreach (Transform t in transform)
+        {
+            Link link = t.GetComponent<Link>();
+            if(link)
+            {
+                if(!link.IsFixed())
+                {
+                    SetState(NetworkObjectState.Broken);
+                }
+            }
+        }
+
         nodes.Add(this);
     }
 
@@ -28,34 +39,94 @@ public class Node : MonoBehaviour
 
     }
 
-    public void SetState(NodeState state)
+    public void SetState(NetworkObjectState state)
     {
         nodeState = state;
-        if(nodeState == NodeState.Fixed)
+        if(nodeState == NetworkObjectState.Fixed)
         {
-            spriteRenderer.color = Color.blue;
+            nodeLight.pointLightOuterRadius = 1.1f;
         }
-        else if (nodeState == NodeState.Broken)
+        else if (nodeState == NetworkObjectState.Broken)
         {
-            spriteRenderer.color = Color.gray;
+            nodeLight.pointLightOuterRadius = 0.3f;
         }
     }
 
     public void ToggleState()
     {
-        if(nodeState == NodeState.Fixed)
+        if(nodeState == NetworkObjectState.Fixed)
         {
-            SetState(NodeState.Broken);
+            SetState(NetworkObjectState.Broken);
         }
         else
         {
-            SetState(NodeState.Fixed);
+            SetState(NetworkObjectState.Fixed);
         }
     }
 
-    internal void LinkedBy(Node parent)
+    internal void LinkedBy(Node neighbor)
     {
-        linkedByNodes.Add(parent);
+        foreach (Transform t in neighbor.transform)
+        {
+            var link = t.GetComponent<Link>();
+            if(link && link.destination == this)
+            {
+                if (!link.IsFixed())
+                {
+                    SetState(NetworkObjectState.Broken);
+                }
+            }
+        }
+
+        linkedByNodes.Add(neighbor);
+    }
+
+    internal bool IsBrokenConnection(Node neighbor)
+    {
+        foreach (Transform t in neighbor.transform)
+        {
+            var link = t.GetComponent<Link>();
+            if (link && link.destination == this && !link.IsFixed())
+            {
+                Debug.Log(link);
+                return true;
+            }
+        }
+
+        foreach (Transform t in transform)
+        {
+            var link = t.GetComponent<Link>();
+            if (link && link.destination == neighbor && !link.IsFixed())
+            {
+                Debug.Log(link);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    internal Link GetBrokenConnection(Node neighbor)
+    {
+        foreach (Transform t in neighbor.transform)
+        {
+            var link = t.GetComponent<Link>();
+            if (link && link.destination == this)
+            {
+                return link;
+            }
+        }
+
+        foreach (Transform t in transform)
+        {
+            var link = t.GetComponent<Link>();
+            if (link && link.destination == neighbor)
+            {
+                return link;
+            }
+        }
+
+        return null;
     }
 
     public void Mark()
@@ -65,15 +136,16 @@ public class Node : MonoBehaviour
 
     public void UnMark()
     {
+        spriteRenderer.color = Color.blue;
         SetState(nodeState);
     }
 
-    public static List<Node> GetNodes()
+    public static HashSet<Node> GetNodes()
     {
         return nodes;
     }
 
-    internal List<Node> GetLinkedBy()
+    internal HashSet<Node> GetLinkedBy()
     {
         return linkedByNodes;
     }

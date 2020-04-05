@@ -6,6 +6,7 @@ public class PlayerControler : MonoBehaviour
 {
     public float movementAngleTolerance = 20.0f;
     public Node currentNode;
+    public float holdDurationForFix = 3f;
 
     void Start()
     {
@@ -22,6 +23,9 @@ public class PlayerControler : MonoBehaviour
     private float vertical = 0.0f;
     Node markedNode = null;
     bool moveRequested = false;
+    private bool fixingNode;
+    float timer;
+    Link brokenConnection;
 
     void Update()
     {
@@ -37,7 +41,7 @@ public class PlayerControler : MonoBehaviour
                 var p1 = transform.position;
                 var p2 = node.transform.position;
                 var destinationAngle = Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * Mathf.Rad2Deg;
-                Debug.Log(string.Format("RA={0} DA={1} DA+={2} DA-={3}", rayAngle, destinationAngle, destinationAngle + 20, destinationAngle - 20));
+                //Debug.Log(string.Format("RA={0} DA={1} DA+={2} DA-={3}", rayAngle, destinationAngle, destinationAngle + 20, destinationAngle - 20));
 
                 if (destinationAngle + movementAngleTolerance >= rayAngle && destinationAngle - movementAngleTolerance <= rayAngle)
                 {
@@ -51,6 +55,45 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && markedNode)
         {
             moveRequested = true;
+        }
+
+        if (Input.GetButtonDown("Fire2") && markedNode && markedNode.IsBrokenConnection(currentNode))
+        {
+            fixingNode = true;
+            timer = Time.time;
+            brokenConnection = markedNode.GetBrokenConnection(currentNode);
+            Debug.Log("Started fixing");
+        }
+
+        if (fixingNode)
+        {
+            UpdateFixingLink();
+        }
+    }
+
+    private void UpdateFixingLink()
+    {
+        if (Input.GetButton("Fire2"))
+        {
+            if (Time.time > timer + holdDurationForFix)
+            {
+                timer = float.PositiveInfinity;
+                Debug.Log("FIXED");
+                fixingNode = false;
+                brokenConnection.SetFixedPercentage(1.01f);
+                brokenConnection = null;
+            }
+            else
+            {
+                brokenConnection.SetFixedPercentage((Time.time - timer) / holdDurationForFix);
+            }
+        }
+        else
+        {
+            timer = float.PositiveInfinity;
+            fixingNode = false;
+            brokenConnection.SetFixedPercentage(0.0f);
+            brokenConnection = null;
         }
     }
 
@@ -84,7 +127,7 @@ public class PlayerControler : MonoBehaviour
         markedNode = null;
     }
 
-    private Node GetClosestNode(List<Node> nodes)
+    private Node GetClosestNode(HashSet<Node> nodes)
     {
         Node closest = null;
         float minDist = Mathf.Infinity;
@@ -102,12 +145,16 @@ public class PlayerControler : MonoBehaviour
         return closest;
     }
 
-    private List<Node> GetLinkedNodes()
+    private HashSet<Node> GetLinkedNodes()
     {
-        List<Node> nodes = new List<Node>(currentNode.GetLinkedBy());
+        HashSet<Node> nodes = new HashSet<Node>(currentNode.GetLinkedBy());
         foreach (Transform child in currentNode.transform)
         {
-            nodes.Add(child.GetComponent<Link>().destination);
+            var link = child.GetComponent<Link>();
+            if (link && link.destination)
+            {
+                nodes.Add(child.GetComponent<Link>().destination);
+            }
         }
 
         return nodes;
