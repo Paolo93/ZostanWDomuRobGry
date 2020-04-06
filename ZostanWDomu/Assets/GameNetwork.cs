@@ -15,7 +15,7 @@ public class GameNetwork : MonoBehaviour
     public string thisMap;
     public string nextMap;
 
-    private float gameTime = 60.0f;
+    public float gameTime = 60.0f;
 
     public void AddLink()
     {
