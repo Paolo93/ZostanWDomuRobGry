@@ -3336,7 +3336,7 @@ GameObject:
   - component: {fileID: 1953497767}
   m_Layer: 0
   m_Name: Network
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3386,6 +3386,9 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 1343292514}
   networkStateText: {fileID: 1484405229}
+  thisMap: 
+  nextMap: 
+  gameTime: 60
 --- !u!1001 &1953965931
 PrefabInstance:
   m_ObjectHideFlags: 0
