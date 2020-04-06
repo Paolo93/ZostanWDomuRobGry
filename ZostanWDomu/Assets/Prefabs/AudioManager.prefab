@@ -76,3 +76,13 @@ MonoBehaviour:
     mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
       type: 2}
     source: {fileID: 0}
+  - name: music_base
+    clip: {fileID: 8300000, guid: 8a4b9353f44a2e340b18ee3e57144dd8, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -7751513389185294002, guid: 06758d06df53d5a44a5d4737701ebe68,
+      type: 2}
+    source: {fileID: 0}

@@ -33,7 +33,17 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-	public void Play(string sound)
+    public void Start()
+    {
+        Sound sound = Array.Find(sounds, item => item.name == "music_base");
+        if(sound != null)
+        {
+            Debug.Log("Found base music");
+            Play("music_base");
+        }
+    }
+
+    public void Play(string sound)
 	{
 		Sound s = Array.Find(sounds, item => item.name == sound);
 		if (s == null)
