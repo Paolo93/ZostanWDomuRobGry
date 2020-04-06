@@ -68,10 +68,10 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: sfx_movement
     clip: {fileID: 8300000, guid: 7b331e5aacf86104782a9c928fa60011, type: 3}
-    volume: 1
+    volume: 0.9
     volumeVariance: 0
     pitch: 1
-    pitchVariance: 0
+    pitchVariance: 0.07
     loop: 0
     mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
       type: 2}
