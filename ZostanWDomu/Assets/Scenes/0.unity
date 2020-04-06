@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdce299782928e47bfe58c4935fba20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: TextAdventure
+  nextLevel: 1
 --- !u!1 &1728118336
 GameObject:
   m_ObjectHideFlags: 0
