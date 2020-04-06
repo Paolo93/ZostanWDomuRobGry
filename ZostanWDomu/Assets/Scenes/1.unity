@@ -3438,7 +3438,7 @@ MonoBehaviour:
   timerText: {fileID: 1343292514}
   networkStateText: {fileID: 1484405229}
   endingCanvas: {fileID: 1354048660}
-  canvasDisplayTime: 10
+  canvasDisplayTime: 7
   itemsToFadeOut:
   - {fileID: 876272693}
   thisMap: 1
