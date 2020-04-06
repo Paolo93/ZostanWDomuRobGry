@@ -59,7 +59,7 @@ public class PlayerControler : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire1") && markedNode)
+        if (Input.GetButtonDown("Fire1") && markedNode && !markedNode.IsBrokenConnection(currentNode))
         {
             moveRequested = true;
         }
