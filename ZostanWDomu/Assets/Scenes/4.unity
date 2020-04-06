@@ -8481,7 +8481,12 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 313157835}
   networkStateText: {fileID: 313157836}
-
+  endingCanvas: {fileID: 959796184}
+  canvasDisplayTime: 7
+  itemsToFadeOut: []
+  thisMap: 4
+  nextMap: 5
+  gameTime: 60
   ending: 0
 --- !u!4 &1602323872 stripped
 Transform:
