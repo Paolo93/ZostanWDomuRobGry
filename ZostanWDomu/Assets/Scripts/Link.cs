@@ -95,6 +95,7 @@ public class Link : MonoBehaviour
             lineRenderer.startColor = linkColor;
             lineRenderer.endColor = linkColor;
             lineRenderer.SetPositions(new[] { connectionPoint1, connectionPoint2 });
+
         }
         else if (percent >= 1.0f)
         {

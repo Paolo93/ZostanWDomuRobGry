@@ -62,6 +62,7 @@ public class PlayerControler : MonoBehaviour
             timer = Time.time;
             brokenConnection = markedNode.GetBrokenConnection(currentNode);
             Debug.Log("Started fixing");
+            AudioManager.instance.Play("sfx_fix_attempt");
         }
 
         if (fixingNode)
@@ -81,6 +82,7 @@ public class PlayerControler : MonoBehaviour
                 fixingNode = false;
                 brokenConnection.SetFixedPercentage(1.01f);
                 brokenConnection = null;
+                AudioManager.instance.Play("sfx_fix_success");
             }
             else
             {
@@ -120,6 +122,7 @@ public class PlayerControler : MonoBehaviour
             currentNode = markedNode;
             markedNode.UnMark();
             transform.position = markedNode.transform.position;
+            AudioManager.instance.Play("sfx_movement");
         }
 
         moveRequested = false;

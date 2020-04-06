@@ -1594,9 +1594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5025e8561f7425a439a203173b9c8026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementAngleTolerance: 20
+  movementAngleTolerance: 30
   currentNode: {fileID: 0}
-  holdDurationForFix: 3
+  holdDurationForFix: 1.5
 --- !u!1 &1883802166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,6 +1712,82 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1883916223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883916225}
+  - component: {fileID: 1883916224}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1883916224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883916223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ecaf94ad7dbe24594f5b5803d6d08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
+    type: 2}
+  sounds:
+  - name: sfx_fix_attempt
+    clip: {fileID: 8300000, guid: 7c243e482376aec4da158757d1575efb, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
+      type: 2}
+    source: {fileID: 0}
+  - name: sfx_fix_success
+    clip: {fileID: 8300000, guid: 5ec7fb0d500be984cb723d1edbf97196, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
+      type: 2}
+    source: {fileID: 0}
+  - name: sfx_movement
+    clip: {fileID: 8300000, guid: 7b331e5aacf86104782a9c928fa60011, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1059603480386619266, guid: 06758d06df53d5a44a5d4737701ebe68,
+      type: 2}
+    source: {fileID: 0}
+--- !u!4 &1883916225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883916223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1942022107
 PrefabInstance:
   m_ObjectHideFlags: 0
