@@ -50,8 +50,8 @@ MonoBehaviour:
   fixedColor: {r: 0, g: 0, b: 1, a: 1}
   multiPress_brokenColor: {r: 0.98475003, g: 1, b: 0, a: 1}
   holdButton_brokenColor: {r: 1, g: 0, b: 0, a: 1}
-  timeToFix: 1.5
-  buttonPressToFix: 5
+  timeToFix: 0.5
+  buttonPressToFix: 3
   parent: {fileID: 0}
 --- !u!120 &5281439261399545180
 LineRenderer:
