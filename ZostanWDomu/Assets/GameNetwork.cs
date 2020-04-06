@@ -12,6 +12,9 @@ public class GameNetwork : MonoBehaviour
     public Text timerText;
     public Text networkStateText;
 
+    public string thisMap;
+    public string nextMap;
+
     private float gameTime = 60.0f;
 
     public void AddLink()
@@ -46,19 +49,13 @@ public class GameNetwork : MonoBehaviour
         networkStateText.text = "Network state " + (((float)(totalLinks - brokenLinks) / (float)totalLinks)*100.0f).ToString("F1") + "%";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         gameTime -= Time.fixedDeltaTime;
         timerText.text = "Time left: " + gameTime.ToString("F1");
         if(gameTime <= 0)
         {
-
+            Loader.Load(thisMap);
         }
     }
 
@@ -66,5 +63,10 @@ public class GameNetwork : MonoBehaviour
     {
         brokenLinks--;
         UpdateNetworkState();
+
+        if(brokenLinks == 0)
+        {
+            Loader.Load(nextMap);
+        }
     }
 }
