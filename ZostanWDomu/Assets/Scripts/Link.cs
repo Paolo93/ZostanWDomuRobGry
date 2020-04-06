@@ -17,19 +17,26 @@ public class Link : MonoBehaviour
 {
     [SerializeField]
     public NetworkObjectState networkObjectState = NetworkObjectState.Fixed;
+    [SerializeField]
     public FixType fixType = FixType.holdButton;
 
     [SerializeField]
     public Node destination = null;
 
+    [SerializeField]
     public Color fixedColor = Color.blue;
+    [SerializeField]
     public Color multiPress_brokenColor = Color.yellow;
+    [SerializeField]
     public Color holdButton_brokenColor = Color.red;
     Color brokenColor;
 
+    [SerializeField]
     public float timeToFix = 1.5f;
+    [SerializeField]
     public int buttonPressToFix = 5;
-    public float multiPressFixDelta = 0.3f;
+
+    private const float multiPressFixDelta = 0.3f;
 
     [HideInInspector]
     [SerializeField]
