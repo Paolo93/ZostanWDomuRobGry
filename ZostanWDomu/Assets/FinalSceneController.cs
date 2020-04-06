@@ -9,8 +9,6 @@ public class FinalSceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.instance.Stop("music_base");
-        AudioManager.instance.Stop("music_sad");
     }
 
     public void End()
