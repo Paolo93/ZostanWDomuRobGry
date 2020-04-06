@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Assertions;
+
 
 public enum NetworkObjectState
 {
@@ -50,8 +52,9 @@ public class Link : MonoBehaviour
     void Start()
     {
         parent = GetComponentInParent<Node>();
-        if (!parent || !destination)
-            return;
+
+        Assert.IsNotNull(parent);
+        Assert.IsNotNull(destination);
 
         brokenColor = fixType == FixType.holdButton ? holdButton_brokenColor : multiPress_brokenColor;
         Color linkColor = networkObjectState == NetworkObjectState.Fixed ? fixedColor : brokenColor;
