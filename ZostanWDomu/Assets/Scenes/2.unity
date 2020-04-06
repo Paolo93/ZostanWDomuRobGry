@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1574,9 +1574,14 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 2034088037}
   networkStateText: {fileID: 1532720177}
+  endingCanvas: {fileID: 595292185}
+  canvasDisplayTime: 10
+  itemsToFadeOut:
+  - {fileID: 1744157127}
   thisMap: 2
   nextMap: 3
   gameTime: 60
+  ending: 0
 --- !u!1001 &392280953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2121,6 +2126,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1486248620971879590, guid: 8f7228e85de42794fa4159917643d98b,
     type: 3}
   m_PrefabInstance: {fileID: 570263655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &595292185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309030697302525875, guid: 7d708e906ab649f4bae3132c3892713c,
+    type: 3}
+  m_PrefabInstance: {fileID: 726748449}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &625006953
 PrefabInstance:

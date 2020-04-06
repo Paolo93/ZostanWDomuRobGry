@@ -6007,6 +6007,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a777f3b9d13ad47908bd17556e8e5b, type: 3}
+--- !u!1 &959796184 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309030697302525875, guid: 77a777f3b9d13ad47908bd17556e8e5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 959796183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &996557387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8475,9 +8481,14 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 313157835}
   networkStateText: {fileID: 313157836}
+  endingCanvas: {fileID: 959796184}
+  canvasDisplayTime: 10
+  itemsToFadeOut:
+  - {fileID: 138988375}
   thisMap: 4
-  nextMap: 5
-  gameTime: 60
+  nextMap: TextAdventure
+  gameTime: 120
+  ending: 0
 --- !u!4 &1602323872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1486248620971879590, guid: 8f7228e85de42794fa4159917643d98b,
