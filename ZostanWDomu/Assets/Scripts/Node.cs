@@ -88,7 +88,6 @@ public class Node : MonoBehaviour
             var link = t.GetComponent<Link>();
             if (link && link.destination == this && !link.IsFixed())
             {
-                Debug.Log(link);
                 return true;
             }
         }
@@ -98,7 +97,6 @@ public class Node : MonoBehaviour
             var link = t.GetComponent<Link>();
             if (link && link.destination == neighbor && !link.IsFixed())
             {
-                Debug.Log(link);
                 return true;
             }
         }

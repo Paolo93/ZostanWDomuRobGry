@@ -44,8 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b815a10da3d81439dee46b183eceb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkObjectState: 0
+  networkObjectState: 1
+  fixType: 0
   destination: {fileID: 0}
+  fixedColor: {r: 0, g: 0, b: 1, a: 1}
+  multiPress_brokenColor: {r: 0.98475003, g: 1, b: 0, a: 1}
+  holdButton_brokenColor: {r: 1, g: 0, b: 0, a: 1}
+  timeToFix: 1.5
+  buttonPressToFix: 5
   parent: {fileID: 0}
 --- !u!120 &5281439261399545180
 LineRenderer:

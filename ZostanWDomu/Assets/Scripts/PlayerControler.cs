@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerControler : MonoBehaviour
 {
     public float movementAngleTolerance = 30.0f;
     public Node currentNode;
-    public float holdDurationForFix = 1.5f;
 
     void Start()
     {
         if(currentNode == null)
         {
             currentNode = GetClosestNode(Node.GetNodes());
+            if(currentNode != null)
+            transform.position = currentNode.transform.position;
         }
-        transform.position = currentNode.transform.position;
     }
 
     private float previousHorizontal = 0.0f;
@@ -24,11 +25,18 @@ public class PlayerControler : MonoBehaviour
     Node markedNode = null;
     bool moveRequested = false;
     private bool fixingNode;
-    float timer;
+    
     Link brokenConnection;
 
     void Update()
     {
+        if (currentNode == null)
+        {
+            currentNode = GetClosestNode(Node.GetNodes());
+            if(currentNode != null)
+                transform.position = currentNode.transform.position;
+        }
+
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
@@ -59,7 +67,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetButtonDown("Fire2") && markedNode && markedNode.IsBrokenConnection(currentNode))
         {
             fixingNode = true;
-            timer = Time.time;
+            
             brokenConnection = markedNode.GetBrokenConnection(currentNode);
             Debug.Log("Started fixing");
             AudioManager.instance.Play("sfx_fix_attempt");
@@ -75,26 +83,31 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetButton("Fire2"))
         {
-            if (Time.time > timer + holdDurationForFix)
+            if(brokenConnection.HoldingButton())
             {
-                timer = float.PositiveInfinity;
-                Debug.Log("FIXED");
                 fixingNode = false;
-                brokenConnection.SetFixedPercentage(1.01f);
                 brokenConnection = null;
-                AudioManager.instance.Play("sfx_fix_success");
+            }
+        }
+        else if(Input.GetButtonUp("Fire2"))
+        {
+            Debug.Log("released");
+            if (brokenConnection.ButtonReleased())
+            {
+                //not fixed
+                fixingNode = false;
+                brokenConnection = null;
+            }
+            else if (brokenConnection.fixType == FixType.holdButton)
+            {
+                //not fixed, button held too short
+                fixingNode = false;
+                brokenConnection = null;
             }
             else
             {
-                brokenConnection.SetFixedPercentage((Time.time - timer) / holdDurationForFix);
+                //potential multitap
             }
-        }
-        else
-        {
-            timer = float.PositiveInfinity;
-            fixingNode = false;
-            brokenConnection.SetFixedPercentage(0.0f);
-            brokenConnection = null;
         }
     }
 
@@ -149,6 +162,9 @@ public class PlayerControler : MonoBehaviour
 
     private HashSet<Node> GetLinkedNodes()
     {
+        if(currentNode == null)
+            currentNode = GetClosestNode(Node.GetNodes());
+
         HashSet<Node> nodes = new HashSet<Node>(currentNode.GetLinkedBy());
         foreach (Transform child in currentNode.transform)
         {
