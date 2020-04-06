@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TextAdventure.unity
     guid: df52c41c4bbd8ac4f9ee85f9f343ef80
+  - enabled: 1
+    path: Assets/Scenes/1.unity
+    guid: a6082997a5c088c4da6f5c3cd9076514
+  - enabled: 1
+    path: Assets/Scenes/2.unity
+    guid: 1cbfb2d68fade664aaddd48703bf1050
   m_configObjects: {}

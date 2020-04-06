@@ -3386,8 +3386,8 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 1343292514}
   networkStateText: {fileID: 1484405229}
-  thisMap: 
-  nextMap: 
+  thisMap: 1
+  nextMap: 2
   gameTime: 60
 --- !u!1001 &1953965931
 PrefabInstance:
