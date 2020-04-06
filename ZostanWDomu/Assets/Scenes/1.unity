@@ -2790,6 +2790,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9da0f050752bc0542bcbf496786b7b68, type: 3}
+--- !u!1 &1354048660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309030697302525875, guid: 9da0f050752bc0542bcbf496786b7b68,
+    type: 3}
+  m_PrefabInstance: {fileID: 1354048659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1428361918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3386,9 +3392,14 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 1343292514}
   networkStateText: {fileID: 1484405229}
+  endingCanvas: {fileID: 1354048660}
+  canvasDisplayTime: 10
+  itemsToFadeOut:
+  - {fileID: 876272693}
   thisMap: 1
   nextMap: 2
   gameTime: 60
+  ending: 0
 --- !u!1001 &1953965931
 PrefabInstance:
   m_ObjectHideFlags: 0

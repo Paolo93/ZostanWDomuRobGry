@@ -12,10 +12,15 @@ public class GameNetwork : MonoBehaviour
     public Text timerText;
     public Text networkStateText;
 
+    public GameObject endingCanvas;
+    public float canvasDisplayTime;
+    public GameObject[] itemsToFadeOut;
+
     public string thisMap;
     public string nextMap;
 
     public float gameTime = 60.0f;
+    public bool ending = false;
 
     public void AddLink()
     {
@@ -51,12 +56,45 @@ public class GameNetwork : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (ending)
+            return;
+
         gameTime -= Time.fixedDeltaTime;
         timerText.text = "Time left: " + gameTime.ToString("F1");
         if(gameTime <= 0)
         {
             Loader.Load(thisMap);
         }
+    }
+
+    IEnumerator ShowCanvas()
+    {
+        ending = true;
+        foreach(var sound in AudioManager.instance.sounds)
+        {
+            sound.volume = 0.1f;
+        }
+
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (var item in itemsToFadeOut)
+        {
+            item.SetActive(false);
+        }
+
+        endingCanvas.SetActive(true);
+        yield return new WaitForSeconds(canvasDisplayTime);
+        endingCanvas.SetActive(false);
+
+        foreach (var sound in AudioManager.instance.sounds)
+        {
+            sound.volume = 1f;
+        }
+
+        Loader.Load(nextMap);
     }
 
     internal void LinkFixed()
@@ -66,7 +104,7 @@ public class GameNetwork : MonoBehaviour
 
         if(brokenLinks == 0)
         {
-            Loader.Load(nextMap);
+            StartCoroutine(ShowCanvas());
         }
     }
 }
