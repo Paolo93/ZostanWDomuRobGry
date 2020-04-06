@@ -43,7 +43,7 @@ public class GameNetwork : MonoBehaviour
             networkStateText.color = Color.blue;
         }
 
-        networkStateText.text = "Network state " + ((float)(totalLinks - brokenLinks) / totalLinks).ToString("F1") + "%";
+        networkStateText.text = "Network state " + (((float)(totalLinks - brokenLinks) / (float)totalLinks)*100.0f).ToString("F1") + "%";
     }
 
     // Update is called once per frame
