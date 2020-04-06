@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8481,13 +8481,7 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 313157835}
   networkStateText: {fileID: 313157836}
-  endingCanvas: {fileID: 959796184}
-  canvasDisplayTime: 10
-  itemsToFadeOut:
-  - {fileID: 138988375}
-  thisMap: 4
-  nextMap: TextAdventure
-  gameTime: 120
+
   ending: 0
 --- !u!4 &1602323872 stripped
 Transform:
