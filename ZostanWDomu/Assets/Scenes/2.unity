@@ -1684,7 +1684,7 @@ MonoBehaviour:
   itemsToFadeOut:
   - {fileID: 1744157127}
   thisMap: 2
-  nextMap: 3
+  nextMap: 4
   gameTime: 60
   ending: 0
 --- !u!1001 &392280953
