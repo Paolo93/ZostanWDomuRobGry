@@ -25,8 +25,13 @@ public class PlayerControler : MonoBehaviour
     Node markedNode = null;
     bool moveRequested = false;
     private bool fixingNode;
+    private ParticleSystem particle = null;
     
     Link brokenConnection;
+
+    void Awake () {
+        particle = GetComponent<ParticleSystem>();
+    }
 
     void Update()
     {
@@ -62,6 +67,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && markedNode && !markedNode.IsBrokenConnection(currentNode))
         {
             moveRequested = true;
+            particle.Play();
         }
 
         if (Input.GetButtonDown("Fire2") && markedNode && markedNode.IsBrokenConnection(currentNode))
