@@ -12,7 +12,6 @@ public class Node : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private static HashSet<Node> nodes = new HashSet<Node>();
     private HashSet<Node> linkedByNodes = new HashSet<Node>();
-    
 
     void Start()
     {
@@ -22,21 +21,17 @@ public class Node : MonoBehaviour
         foreach (Transform t in transform)
         {
             Link link = t.GetComponent<Link>();
-            if(link)
+            if (link)
             {
-                if(!link.IsFixed())
+                if (!link.IsFixed())
                 {
                     SetState(NetworkObjectState.Broken);
                 }
             }
         }
+   
 
         nodes.Add(this);
-    }
-
-    void Update()
-    {
-
     }
 
     public void SetState(NetworkObjectState state)
@@ -49,18 +44,6 @@ public class Node : MonoBehaviour
         else if (nodeState == NetworkObjectState.Broken)
         {
             nodeLight.pointLightOuterRadius = 0.3f;
-        }
-    }
-
-    public void ToggleState()
-    {
-        if(nodeState == NetworkObjectState.Fixed)
-        {
-            SetState(NetworkObjectState.Broken);
-        }
-        else
-        {
-            SetState(NetworkObjectState.Fixed);
         }
     }
 

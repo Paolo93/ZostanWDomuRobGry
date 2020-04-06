@@ -74,10 +74,14 @@ public class Link : MonoBehaviour
         gradient.SetKeys(colorKey, alphaKey);
 
         destination.LinkedBy(parent);
-    }
 
-    private void FixedUpdate()
-    {
+        var network = GetGameNetwork();
+
+        network.AddLink();
+        if (networkObjectState == NetworkObjectState.Broken)
+        {
+            network.AddBrokenLink();
+        }
     }
 
     public bool IsFixed()
@@ -96,6 +100,7 @@ public class Link : MonoBehaviour
 
     float timer = float.PositiveInfinity;
     int pressedButton = 0;
+    float releaseTimer;
 
     public bool HoldingButton()
     {
@@ -122,34 +127,48 @@ public class Link : MonoBehaviour
 
         if (fixType == FixType.holdButton)
         {
+            releaseTimer = Time.time;
             SetFixedPercentage(0f);
-            timer = float.PositiveInfinity;
             return false;
         }
 
-        if(Time.time - timer < multiPressFixDelta)
+        if (Time.time - releaseTimer < multiPressFixDelta)
         {
-            timer = float.PositiveInfinity;
+            releaseTimer = Time.time;
             return SetFixedPercentage((float)pressedButton++ / (float)buttonPressToFix);
         }
         else
         {
-            //Debug.Log("Press delta: " + (Time.time - timer));
+            releaseTimer = Time.time;
+            Debug.Log("RESET");
             pressedButton = 0;
+            return SetFixedPercentage(0);
         }
-        timer = float.PositiveInfinity;
-        return false;
+    }
+
+    private GameNetwork GetGameNetwork()
+    {
+        foreach (var obj in GameObject.FindGameObjectsWithTag("GameController"))
+        {
+            var network = obj.GetComponent<GameNetwork>();
+            if (network != null)
+            {
+                return network;
+            }
+        }
+        return null;
     }
 
     internal bool SetFixedPercentage(float percent)
     {
-        //Debug.Log("Fix " + percent * 100.0f + "%");
+        Debug.Log("Fix " + percent * 100.0f + "%");
         if (percent >= 1.0f)
         {
             networkObjectState = NetworkObjectState.Fixed;
             parent.SetState(NetworkObjectState.Fixed);
             destination.SetState(NetworkObjectState.Fixed);
             AudioManager.instance.Play("sfx_fix_success");
+            GetGameNetwork().LinkFixed();
 
             return true;
         }
