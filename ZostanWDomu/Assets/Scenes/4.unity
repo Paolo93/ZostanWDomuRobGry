@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8475,9 +8475,13 @@ MonoBehaviour:
   brokenLinks: 0
   timerText: {fileID: 313157835}
   networkStateText: {fileID: 313157836}
+  endingCanvas: {fileID: 0}
+  canvasDisplayTime: 0
+  itemsToFadeOut: []
   thisMap: 4
   nextMap: 5
   gameTime: 60
+  ending: 0
 --- !u!4 &1602323872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1486248620971879590, guid: 8f7228e85de42794fa4159917643d98b,
